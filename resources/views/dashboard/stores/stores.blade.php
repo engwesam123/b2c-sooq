@@ -73,7 +73,7 @@
                 <!--begin::Table body-->
                 <tbody class="fw-bold text-gray-600">
                 @forelse($stores as $store)
-                    <!--begin::Table row-->
+                     <!--begin::Table row-->
                     <tr>
                         <!--begin::Checkbox-->
                         <td>
@@ -110,7 +110,7 @@
                         <!--end::Type=-->
                         <!--begin::Action=-->
                         <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                            <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">العمليات
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                 <span class="svg-icon svg-icon-5 m-0">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

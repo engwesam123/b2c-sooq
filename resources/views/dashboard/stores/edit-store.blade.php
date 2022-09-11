@@ -46,7 +46,7 @@
                             <i class="bi bi-pencil-fill fs-7"></i>
                             <!--end::Icon-->
                             <!--begin::Inputs-->
-                            <input type="file" name="logo_image" accept=".png, .jpg, .jpeg" />
+                            <input type="file" name="image" accept=".png, .jpg, .jpeg" />
                             <input type="hidden" name="avatar_remove" />
                             @error('logo_image')
                             <span class="text-danger">{{$message}}</span>

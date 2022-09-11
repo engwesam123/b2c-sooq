@@ -56,14 +56,15 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-                $product = Product::find($id)->first();
+                $product = Product::find($id);
                 // get product category and store
                 $category = Product::find($id)->category()->first();
                 $store = Product::find($id)->store()->first();
                 $product->store_name = $store->store_name;
-                $product->product_image = $path;
                  $path =   env('APP_URL').Storage::url($product->product_image) ;
-                $product->category_name = $category->category_name;
+                 $product->product_image = $path;
+
+        $product->category_name = $category->category_name;
 
                  $return_data = array(
                     'status' => $product ? true : false,

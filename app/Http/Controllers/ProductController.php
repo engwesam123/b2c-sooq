@@ -32,7 +32,7 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         $categories = Category::all();
-        $stores = Store::all()->where('id', $user->store_id);
+        $stores = Store::all();
 
         return view('dashboard.products.add-product', compact('categories', 'stores'));
 
@@ -52,25 +52,27 @@ class ProductController extends Controller
         ]);
         $data = $request->except('product_image');
 
-//        $request->validate([
-//            'product_name' => 'required|string|max:255',
-//            'slug' => 'required|unique:products',
-//            'product_description' => 'required|string|max:255',
-//            'category_id' => 'required|integer|exists:categories,id',
-//            'store_id' => 'required|integer|exists:stores,id',
-//            'status' => 'required|in:published,unpublished,scheduled',
-//            'base_price' => 'required|numeric',
-//            'sku' => 'required|numeric|max:255',
-//            'Quantity' => 'required|numeric',
-//         ]);
+        $request->validate([
+            'product_name' => 'required|string|max:255',
+            'slug' => 'required|unique:products',
+            'product_description' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
+            'store_id' => 'required|integer|exists:stores,id',
+            'status' => 'required|in:published,unpublished,scheduled',
+            'base_price' => 'required|numeric',
+            'sku' => 'required|numeric|max:255',
+            'Quantity' => 'required|numeric',
+         ]);
 
 
-        if ($request->has('product_image')) {
-            $file = $request->file('product_image');
-            $name = time();
-            $path =  $file->storeAs('uploads/products', $name,  'public');
+           if ($request->hasFile('image')) {
+            $file = $request->file('image');
+             $newString = str_replace(' ', '_', $file->getClientOriginalName());
+             $name = time().$newString;
+             $path =  $file->storeAs('uploads/products', $name,  'public');
             $data['product_image'] = $path;
-        }
+         }
+
 
          Product::create($data);
         return redirect()->route('products.index')->with('success', 'تم إضافة المنتج بنجاح');
@@ -112,31 +114,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $data = $request->except('product_image');
+
         $oldImage = $product->product_image;
-        //Update the specified category in storage
+        $data = $request->except('product_image');
+         //Update the specified category in storage
         $request->merge([
             'slug' => Str::slug($request->post('product_name'))
         ]);
 
-//        $request->validate([
-//            'product_name' => 'required|string|max:255',
-//            'slug' => 'required|unique:products',
-//            'product_description' => 'required|string|max:255',
-//            'category_id' => 'required|integer|exists:categories,id',
-//            'store_id' => 'required|integer|exists:stores,id',
-//            'status' => 'required|in:published,unpublished,scheduled',
-//            'base_price' => 'required|numeric',
-//            'sku' => 'required|numeric|max:255',
-//            'Quantity' => 'required|numeric',
-//        ]);
-//
+        $request->validate([
+            'product_name' => 'required|string|max:255',
+            'slug' => 'required|unique:products',
+            'product_description' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id',
+            'store_id' => 'required|integer|exists:stores,id',
+            'status' => 'required|in:published,unpublished,scheduled',
+            'base_price' => 'required|numeric',
+            'sku' => 'required|numeric|max:255',
+            'Quantity' => 'required|numeric',
+        ]);
 
-        if ($request->hasFile('product_image')) {
-            //Delete the old image
+            if($request->hasFile('image')) {
             Storage::disk('public')->delete($oldImage);
-            $file = $request->file('product_image');
-            $name = time();
+            $file = $request->file('image');
+            $newString = str_replace(' ', '_', $file->getClientOriginalName());
+            $name = time().$newString;
             $path =  $file->storeAs('uploads/products', $name,  'public');
             $data['product_image'] = $path;
         }

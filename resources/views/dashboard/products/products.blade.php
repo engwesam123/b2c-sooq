@@ -45,14 +45,13 @@
                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-product-filter="status">
                     <option></option>
                     <option value="all">All</option>
-                    <option value="published">Published</option>
-                    <option value="scheduled">Scheduled</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="published">published</option>
+                     <option value="inactive">unpublished</option>
                 </select>
                 <!--end::Select2-->
             </div>
             <!--begin::Add product-->
-            <a href="{{route('products.create')}}" class="btn btn-primary">Add Product</a>
+            <a href="{{route('products.create')}}" class="btn btn-primary">اضافة منتج جديد</a>
             <!--end::Add product-->
         </div>
         <!--end::Card toolbar-->
@@ -71,12 +70,12 @@
                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />
                     </div>
                 </th>
-                <th class="min-w-200px">Product</th>
+                <th class="min-w-200px">المنتج</th>
                 <th class="text-end min-w-100px">SKU</th>
-                <th class="text-end min-w-70px">Qty</th>
-                <th class="text-end min-w-100px">Price</th>
-                <th class="text-end min-w-100px">Status</th>
-                <th class="text-end min-w-70px">Actions</th>
+                <th class="text-end min-w-70px">الكمية</th>
+                <th class="text-end min-w-100px">السعر</th>
+                <th class="text-end min-w-100px">الحالة</th>
+                <th class="text-end min-w-70px">العمليات</th>
             </tr>
             <!--end::Table row-->
             </thead>
@@ -124,7 +123,7 @@
                 <!--end::Qty=-->
                 <!--begin::Price=-->
                 <td class="text-end pe-0">
-                    <span class="fw-bolder text-dark">${{$product->base_price}}</span>
+                    <span class="fw-bolder text-dark"> {{$product->base_price}}</span>
                 </td>
                 <!--end::Price=-->
 
@@ -137,7 +136,7 @@
                 <!--end::Status=-->
                 <!--begin::Action=-->
                 <td class="text-end">
-                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">العمليات
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                         <span class="svg-icon svg-icon-5 m-0">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -149,7 +148,7 @@
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                         <!--begin::Menu item-->
                         <div class="menu-item px-3">
-                            <a href="{{route('products.edit', $product->id)}}" class="menu-link px-3">Edit</a>
+                            <a href="{{route('products.edit', $product->id)}}" class="menu-link px-3">تعديل</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
@@ -157,7 +156,7 @@
                             @csrf
                             @method('DELETE')
                             <div class="menu-item px-3">
-                                <button style="border: 0; width: 100%; background: red; color: white" type="submit" class="menu-link px-3">Delete</button>
+                                <button style="border: 0; width: 100%; background: red; color: white" type="submit" class="menu-link px-3">حذف</button>
                             </div>
                         </form>
 
@@ -170,7 +169,7 @@
             @empty
                 <tr>
                     <td>
-                        No data found in the table
+                        لا يوجد منتجات
                     </td>
                 </tr>
             @endforelse

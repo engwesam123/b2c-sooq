@@ -65,8 +65,11 @@ class StoreController extends Controller
 
 //         Request merge
         if ($request->hasFile('logo_image')) {
+
             $file = $request->file('logo_image');
-             $name = time();
+            $newString = str_replace(' ', '_', $file->getClientOriginalName());
+            $name = time().$newString;
+
             $path =  $file->storeAs('uploads/stores', $name,  'public');
             $data['logo_image'] = $path;
         }
@@ -115,9 +118,8 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        $data = $request->except('logo_image');
+         $data = $request->except('logo_image');
         $oldImage = $store->logo_image;
-
          $request->merge([
             'slug' => Str::slug($request->post('store_name'))
         ]);
@@ -129,13 +131,13 @@ class StoreController extends Controller
             'status' => 'required|in:published,unpublished,scheduled',
          ]);
 
-        if ($request->hasFile('logo_image')) {
+         if ($request->hasFile('image')) {
             //Delete the old image
             Storage::disk('public')->delete($oldImage);
 
-            $file = $request->file('logo_image');
-            $name = time();
-            $path =  $file->storeAs('uploads/stores', $name,  'public');
+            $file = $request->file('image');
+             $newString = str_replace(' ', '_', $file->getClientOriginalName());
+             $name = time().$newString;            $path =  $file->storeAs('uploads/stores', $name,  'public');
             $data['logo_image'] = $path;
         }
 

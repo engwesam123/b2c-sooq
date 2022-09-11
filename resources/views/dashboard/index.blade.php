@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'eCommerce Dashboard')
+@section('title', 'احصاءيات المتجر')
 
 @section('breadcrumb')
     @parent
@@ -10,7 +10,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-muted">eCommerce</li>
+    <li class="breadcrumb-item text-muted">احصائيات المتجر</li>
     <!--end::Item-->
 @endsection
 @section('content')

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Edit Category')
+@section('title', 'تحرير القسم')
 
 @section('breadcrumb')
     @parent
@@ -10,7 +10,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-muted">Category</li>
+    <li class="breadcrumb-item text-muted">الاقسام</li>
     <!--end::Item-->
 @endsection
 @section('content')
@@ -25,7 +25,7 @@
                 <div class="card-header">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h2>Thumbnail</h2>
+                        <h2>صورة للقسم</h2>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -67,7 +67,7 @@
                     </div>
                     <!--end::Image input-->
                     <!--begin::Description-->
-                    <div class="text-muted fs-7">Set the category thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+                    <div class="text-muted fs-7">تعيين الصورة المصغرة للقسم. تقبل فقط ملفات الصور * .png و * .jpg و * .jpeg</div>
                     <!--end::Description-->
 
                 </div>
@@ -81,7 +81,7 @@
                 <div class="card-header">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h2>Status</h2>
+                        <h2>حالة القسم</h2>
                     </div>
                     <!--end::Card title-->
                     <!--begin::Card toolbar-->
@@ -96,9 +96,8 @@
                     <!--begin::Select2-->
                     <select id="category_status" name="status" class="form-select mb-2 @error('status') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
                         <option></option>
-                        <option value="published" selected="selected">Published</option>
-                        <option value="scheduled">Scheduled</option>
-                        <option value="unpublished">Unpublished</option>
+                        <option value="published" selected="selected">نشط</option>
+                        <option value="unpublished">متوقف</option>
                     </select>
                     @error('status')
                     <span class="text-danger">{{$message}}</span>
@@ -106,15 +105,10 @@
 
                     <!--end::Select2-->
                     <!--begin::Description-->
-                    <div class="text-muted fs-7">Set the category status.</div>
+                    <div class="text-muted fs-7">قم بتعيين حالة القسم</div>
 
                     <!--end::Description-->
-                    <!--begin::Datepicker-->
-                    <div class="d-none mt-10">
-                        <label for="kt_ecommerce_add_category_status_datepicker" class="form-label">Select publishing date and time</label>
-                        <input class="form-control" id="kt_ecommerce_add_category_status_datepicker" placeholder="Pick date &amp; time" />
-                    </div>
-                    <!--end::Datepicker-->
+
                 </div>
                 <!--end::Card body-->
             </div>
@@ -130,7 +124,7 @@
                 <!--begin::Card header-->
                 <div class="card-header">
                     <div class="card-title">
-                        <h2>General</h2>
+                        <h2>بيانات القسم</h2>
                     </div>
                 </div>
                 <!--end::Card header-->
@@ -139,7 +133,7 @@
                     <!--begin::Input group-->
                     <div class="mb-10 fv-row">
                         <!--begin::Label-->
-                        <label class="required form-label">Category Name</label>
+                        <label class="required form-label">اسم القسم</label>
                         <!--end::Label-->
                         <!--begin::Input-->
                         <input type="text" name="category_name" class="form-control mb-2 @error('category_name') is-invalid @enderror" placeholder="Product name" value="{{old('category_name') ?? $category->category_name}}" />
@@ -151,14 +145,14 @@
 
                         <!--end::Input-->
                         <!--begin::Description-->
-                        <div class="text-muted fs-7">A category name is required and recommended to be unique.</div>
+                        <div class="text-muted fs-7">مطلوب اسم القسم ويوصى به ليكون فريدًا</div>
                         <!--end::Description-->
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->
                     <div>
                         <!--begin::Label-->
-                        <label class="form-label">Description</label>
+                        <label class="form-label">الوصف</label>
                         <!--end::Label-->
                         <!--begin::Editor-->
                         <textarea id="category_description" class="form-control mb-2 @error('category_description') is-invalid @enderror"  name="category_description" rows="4" cols="50" placeholder="category description">{{old('category_description') ?? $category->category_description}}
@@ -172,7 +166,7 @@
 
                         <!--end::Editor-->
                         <!--begin::Description-->
-                        <div class="text-muted fs-7">Set a description to the category for better visibility.</div>
+                        <div class="text-muted fs-7">قم بتعيين وصف للقسم للحصول على رؤية أفضل.</div>
                         <!--end::Description-->
                     </div>
                     <!--end::Input group-->
@@ -183,7 +177,7 @@
                             <div class="card-header">
                                 <!--begin::Card title-->
                                 <div class="card-title">
-                                    <h2>Parent Category</h2>
+                                    <h2>القسم الرئيسي</h2>
                                 </div>
                                 <!--end::Card title-->
                                 <!--begin::Card toolbar-->
@@ -221,13 +215,13 @@
 
             <div class="d-flex justify-content-end">
                 <!--begin::Button-->
-                <a href="#" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
+                <a href="#" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">الغاء</a>
                 <!--end::Button-->
                 <!--begin::Button-->
                 <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                    <span class="indicator-label">Save Changes</span>
-                    <span class="indicator-progress">Please wait...
-					<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    <span class="indicator-label">حفظ التغيرات</span>
+                    <span class="indicator-progress"انتظر قليلا...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
                 <!--end::Button-->
             </div>

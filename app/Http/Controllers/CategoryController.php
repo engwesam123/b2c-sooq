@@ -63,7 +63,8 @@ class CategoryController extends Controller
 //         Request merge
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $name = time();
+            $newString = str_replace(' ', '_', $file->getClientOriginalName());
+            $name = time().$newString;
             $path =  $file->storeAs('uploads/categories', $name,  'public');
             $data['image'] = $path;
         }
@@ -128,7 +129,8 @@ class CategoryController extends Controller
             Storage::disk('public')->delete($oldImage);
 
             $file = $request->file('image');
-            $name = time();
+            $newString = str_replace(' ', '_', $file->getClientOriginalName());
+            $name = time().$newString;
             $path =  $file->storeAs('uploads/categories', $name,  'public');
             $data['image'] = $path;
         }

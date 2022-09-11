@@ -43,7 +43,7 @@
                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                         <i class="bi bi-pencil-fill fs-7"></i>
                         <!--begin::Inputs-->
-                        <input type="file" name="product_image" accept=".png, .jpg, .jpeg" />
+                        <input type="file" name="image"  />
                         <input type="hidden" name="avatar_remove" />
                         <!--end::Inputs-->
                     </label>
@@ -203,7 +203,13 @@
                                 <label class="required form-label">اسم النتج</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="product_name" class="form-control mb-2" placeholder="Product name" value="" />
+                                <input type="text" name="product_name" class="form-control mb-2 @error('product_name') is-invalid @enderror" placeholder="Product name" value="{{old('product_name')}}" />
+                                @error('product_name')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                 </span>
+                                @enderror
+
                                 <!--end::Input-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">مطلوب اسم منتج ويوصى به ليكون فريدًا.
@@ -217,7 +223,12 @@
                                 <label class="form-label">وصف المنتج</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <textarea id="product_description" class="form-control mb-2 @error('product_description') is-invalid @enderror"  name="product_description" rows="4" cols="50" placeholder="product description"></textarea>
+                                <textarea id="product_description" class="form-control mb-2 @error('product_description') is-invalid @enderror"  name="product_description" rows="4" cols="50" placeholder="product description">{{old('product_description')}}</textarea>
+                                @error('product_description')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 <!--end::Editor-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">قم بتعيين وصف للمنتج للحصول على رؤية أفضل.
@@ -247,7 +258,12 @@
                                 <label class="required form-label">السعر الأساسي</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="base_price" class="form-control mb-2" placeholder="Product price" value="" />
+                                <input type="text" name="base_price" class="form-control mb-2 @error('base_price') is-invalid @enderror" placeholder="Product price" value="{{old('base_price')}}" />
+                                @error('base_price')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 <!--end::Input-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">حدد سعر المنتج.</div>
@@ -270,7 +286,12 @@
                                 <label class="required form-label">SKU</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="sku" class="form-control mb-2" placeholder="SKU Number" value="" />
+                                <input type="text" name="sku" class="form-control mb-2  @error('sku') is-invalid @enderror" placeholder="SKU Number" value="{{old('sku')}}" />
+                                @error('sku')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                                 <!--end::Input-->
                                 <!--begin::Description-->
                                 <div class="text-muted fs-7">Enter the product SKU.</div>
@@ -285,7 +306,12 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <div class="d-flex gap-3">
-                                    <input type="number" name="Quantity" class="form-control mb-2" placeholder="On shelf" value="" />
+                                    <input type="number" name="Quantity" class="form-control mb-2 @error('Quantity') is-invalid @enderror"  value="{{old('Quantity')}}" />
+                                    @error('Quantity')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
                                 </div>
                                 <!--end::Input-->
                                 <!--begin::Description-->
@@ -308,11 +334,11 @@
         <!--end::Tab content-->
         <div class="d-flex justify-content-end">
             <!--begin::Button-->
-            <a href="#" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
+            <a href="#" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">الغاء</a>
             <!--end::Button-->
             <!--begin::Button-->
             <button type="submit" id="kt_ecommerce_add_product_form" class="btn btn-primary">
-                <span class="indicator-label">Save Changes</span>
+                <span class="indicator-label">حفظ التغيرات</span>
                 <span class="indicator-progress">Please wait...
 					<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
             </button>
